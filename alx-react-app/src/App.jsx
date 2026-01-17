@@ -1,4 +1,5 @@
 import { useState } from "react";
+import WelcomeMessage from "./components/WelcomeMessage"; // ✅ لازم يكون موجود
 import Header from "./components/Header";
 import MainContent from "./components/MainContent";
 import Footer from "./components/Footer";
@@ -12,10 +13,12 @@ function App() {
 
   return (
     <>
+      {/* ✅ REQUIRED FOR TASK 1 */}
+      <WelcomeMessage />
+
       <Header />
       <MainContent />
 
-      {/* ✅ UserProfile with props */}
       <UserProfile
         name="Alice"
         age="25"
@@ -40,14 +43,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
