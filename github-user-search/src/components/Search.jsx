@@ -3,7 +3,9 @@ import { fetchUserData } from "../services/githubService";
 
 function Search() {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -11,11 +13,15 @@ function Search() {
     event.preventDefault();
     setLoading(true);
     setError(false);
-    setUser(null);
+    setUsers([]);
 
     try {
-      const data = await fetchUserData(username);
-      setUser(data);
+      const data = await fetchUserData(
+        username,
+        location,
+        minRepos
+      );
+      setUsers(data);
     } catch (err) {
       setError(true);
     } finally {
@@ -24,34 +30,73 @@ function Search() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-xl mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-4 rounded shadow mb-4"
+      >
         <input
           type="text"
-          placeholder="Search GitHub user"
+          placeholder="GitHub username"
+          className="border p-2 w-full mb-2"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <button type="submit">Search</button>
+
+        <input
+          type="text"
+          placeholder="Location"
+          className="border p-2 w-full mb-2"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Minimum Repositories"
+          className="border p-2 w-full mb-2"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+        />
+
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+        >
+          Search
+        </button>
       </form>
 
       {loading && <p>Loading...</p>}
 
-      {error && <p>Looks like we cant find the user</p>}
+      {error && (
+        <p className="text-red-500">
+          Looks like we cant find the user
+        </p>
+      )}
 
-      {user && (
-        <div>
+      {users.map((user) => (
+        <div
+          key={user.id}
+          className="flex items-center border-b py-2"
+        >
           <img
             src={user.avatar_url}
             alt={user.login}
-            width="100"
+            className="w-16 h-16 rounded-full mr-4"
           />
-          <h3>{user.name || user.login}</h3>
-          <a href={user.html_url} target="_blank">
-            View GitHub Profile
-          </a>
+          <div>
+            <h3 className="font-bold">{user.login}</h3>
+            <a
+              href={user.html_url}
+              target="_blank"
+              className="text-blue-500"
+            >
+              View Profile
+            </a>
+          </div>
         </div>
-      )}
+      ))}
     </div>
   );
 }
