@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import data from "../data.json";
 
 function HomePage() {
-  // useState hook
   const [recipes, setRecipes] = useState([]);
 
-  // useEffect hook
   useEffect(() => {
     setRecipes(data); // load data.json
   }, []);
@@ -40,13 +39,17 @@ function HomePage() {
               <h2 className="text-lg font-semibold mb-2">
                 {recipe.title}
               </h2>
+
               <p className="text-gray-600 text-sm">
                 {recipe.summary}
               </p>
 
-              <button className="mt-4 text-blue-500 hover:underline">
+              <Link
+                to={`/recipe/${recipe.id}`}
+                className="mt-4 inline-block text-blue-500 hover:underline"
+              >
                 View Recipe
-              </button>
+              </Link>
             </div>
           </div>
         ))}
