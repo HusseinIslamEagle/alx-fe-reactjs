@@ -19,42 +19,44 @@ function RecipeDetail() {
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      <img
-        src={recipe.image}
-        alt={recipe.title}
-        className="w-full h-64 object-cover rounded-lg mb-6"
-      />
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img
+          src={recipe.image}
+          alt={recipe.title}
+          className="w-full h-64 object-cover rounded-lg mb-6"
+        />
 
-      <h1 className="text-3xl font-bold mb-4">
-        {recipe.title}
-      </h1>
+        <h1 className="text-3xl font-bold mb-4">
+          {recipe.title}
+        </h1>
 
-      <p className="text-gray-600 mb-6">
-        {recipe.summary}
-      </p>
+        <p className="text-gray-600 mb-6">
+          {recipe.summary}
+        </p>
 
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">
-          Ingredients
-        </h2>
-        <ul className="list-disc list-inside">
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
-          ))}
-        </ul>
-      </div>
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold mb-2">
+            Ingredients
+          </h2>
+          <ul className="list-disc list-inside">
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
+        </div>
 
-      <div>
-        <h2 className="text-xl font-semibold mb-2">
-          Cooking Instructions
-        </h2>
-        <ol className="list-decimal list-inside">
-          {recipe.instructions.map((step, index) => (
-            <li key={index} className="mb-2">
-              {step}
-            </li>
-          ))}
-        </ol>
+        <div>
+          <h2 className="text-xl font-semibold mb-2">
+            Cooking Instructions
+          </h2>
+          <ol className="list-decimal list-inside">
+            {recipe.instructions.map((step, index) => (
+              <li key={index} className="mb-2">
+                {step}
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </div>
   );
