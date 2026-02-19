@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddTodoForm from './AddTodoForm';
 
 function TodoList() {
+  // استخدام حالة افتراضية كما هو مطلوب في التكليف
   const [todos, setTodos] = useState([
-    { id: 1, text: 'Initial Todo 1', completed: false },
-    { id: 2, text: 'Initial Todo 2', completed: false }
+    { id: 1, text: 'Learn React', completed: false },
+    { id: 2, text: 'Build a Todo App', completed: false }
   ]);
 
   const addTodo = (text) => {
@@ -23,19 +24,15 @@ function TodoList() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <h1>Todo List</h1>
       <AddTodoForm addTodo={addTodo} />
       <ul>
         {todos.map(todo => (
-          <li key={todo.id} style={{ marginBottom: '10px' }}>
+          <li key={todo.id}>
             <span 
               onClick={() => toggleTodo(todo.id)}
-              style={{ 
-                textDecoration: todo.completed ? 'line-through' : 'none',
-                cursor: 'pointer',
-                marginRight: '10px'
-              }}
+              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
             >
               {todo.text}
             </span>
