@@ -18,12 +18,12 @@ function App() {
           <Route index element={<Home />} />
 
           <Route
-            path="profile"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Profile />
-              </ProtectedRoute>
-            }
+           path="profile/*"
+           element={
+             <ProtectedRoute isAuthenticated={isAuthenticated}>
+               <Profile />
+             </ProtectedRoute>
+  }
           >
             <Route path="details" element={<ProfileDetails />} />
             <Route path="settings" element={<ProfileSettings />} />
