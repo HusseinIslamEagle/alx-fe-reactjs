@@ -16,13 +16,14 @@ function App() {
           <Route index element={<Home />} />
 
           <Route
-            path="/profile/*"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
+  path="/profile/*"
+  element={
+    <ProtectedRoute>
+      <Profile />
+    </ProtectedRoute>
+  }
+/>
+
 
           {/* ✅ required exact string */}
           <Route path="/blog/:id" element={<BlogPost />} />
